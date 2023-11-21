@@ -238,9 +238,7 @@ Retorna dados sobre os contratos vigentes do devedor.
 ### Consultar dívidas do contrato com o credor [GET]
 Retorna as dívidas e parcelas do contrato.
 
-Esse método só deve ser chamado quando o o campo `permiteDivida` for `true`
-
-Observação: Converter valores para numerais ou deixar formatado como vem do WS? 
+Esse método só deverá ser chamado quando o campo `permiteDivida` for `true`
 
 + Request
     + Headers
@@ -299,7 +297,8 @@ Observação: Converter valores para numerais ou deixar formatado como vem do WS
 ### Consultar propostas do contrato com o credor [GET]
 Retorna as propostas ofertadas para o contrato.
 
-Esse método só deve ser chamado quando o o campo `permiteProposta` for `true`
+Esse método só deverá ser chamado quando o campo `permiteProposta` for `true`
+
 + Parameters
     + vencimento: `25/11/2023` (string, optional) - Data de vencimento desejada.
 
@@ -369,7 +368,8 @@ Esse método só deve ser chamado quando o o campo `permiteProposta` for `true`
 ### Consultar acordos do contrato com o credor [GET]
 Retorna os acordos em andamento.
 
-Esse método só deve ser chamado quando o o campo `permiteAcordo` for `true`
+Esse método só deverá ser chamado quando o campo `permiteAcordo` for `true`
+
 + Request
     + Headers
 
@@ -406,6 +406,7 @@ Esse método só deve ser chamado quando o o campo `permiteAcordo` for `true`
 ## Boletos [/api/v1/boletos/gerar]
 ### Gerar boleto [POST]
 Esse método faz a efetivação da solicitação de um acordo ou segunda via.
+
 + Request modo acordo
     + Headers
 
@@ -466,6 +467,7 @@ Esse método faz a efetivação da solicitação de um acordo ou segunda via.
 ## Boletos [/api/v1/boletos/emitir]
 ### Emitir boleto [POST]
 Esse método retorna o boleto gerado em PDF e sua linha digitável.
+
 + Request modo acordo
     + Headers
 
