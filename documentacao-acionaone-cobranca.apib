@@ -2,13 +2,17 @@ FORMAT: 1A
 
 # API do aplicativo Aciona One
 
-API de cobrança do Aciona One.
+API de cobrança do aplicativo Aciona One.
+
+Esta documentação contempla somente o módulo de cobrança e seu dashboard.
 
 
 # Group Cobrança
 
 ## Fila de Cobrança [/api/v1/cobranca/fila]
-### Consultar Fila [GET]
+### Consultar fila de cobrança [GET]
+Retorna uma lista com clientes para serem acionados.
+
 + Request
     + Headers 
 
@@ -48,7 +52,9 @@ API de cobrança do Aciona One.
 + Parameters
     + cpfcnpf: `02313071286` (required, string) - CPF/CNPJ do devedor.
 
-### Consultar Débitos [GET]
+### Consultar débitos por CPF/CNPJ [GET]
+Retorna débitos do cliente e seus credores.
+
 + Request
     + Headers 
 
@@ -105,7 +111,9 @@ API de cobrança do Aciona One.
     + cpfcnpf: `02313071286` (required, string) - CPF/CNPJ do devedor.
     + credor: 2002 (required, number) - CPF/CNPJ do devedor.
 
-### Consultar Devedor [GET]
+### Consultar dados do devedor [GET]
+Retorna todos os dados do devedor.
+
 + Request
     + Headers
 
@@ -179,7 +187,9 @@ API de cobrança do Aciona One.
     + cpfcnpf: `02313071286` (required, string) - CPF/CNPJ do devedor.
     + credor: 2002 (required, number) - Credor em qual o devedor tem débitos.
 
-### Consultar Contratos [GET]
+### Consultar contratos com o credor [GET]
+Retorna dados sobre os contratos vigentes do devedor.
+
 + Request
     + Headers 
 
@@ -197,12 +207,12 @@ API de cobrança do Aciona One.
                     "contratos": [
                         {
                             "codcredor": "2002",
-                            "numcontrato": "02523992264",
-                            "permiteacordo": true,
-                            "permitedivida": true,
-                            "permiteproposta": false,
+                            "contrato": "02523992264",
+                            "permiteAcordo": true,
+                            "permiteDivida": true,
+                            "permiteProposta": false,
                             "situacao": "Acordo em andamento",
-                            "valorprincipal": "R$ 833,10",
+                            "valorPrincipal": "R$ 833,10",
                             "vencimento": "24/11/2023",
                             "quantidadeParcelas": 1
                         }
@@ -225,7 +235,11 @@ API de cobrança do Aciona One.
     + credor: 2002 (required, number) - Credor em qual o devedor tem débitos.
     + contrato: `02313071286` (required, string) - Numero do contratato do devedor.
 
-### Consultar Dívidas [GET]
+### Consultar dívidas do contrato com o credor [GET]
+Retorna as dívidas e parcelas do contrato.
+
+Esse método só deve ser chamado quando o o campo `permiteDivida` for `true`
+
 Observação: Converter valores para numerais ou deixar formatado como vem do WS? 
 
 + Request
@@ -282,7 +296,10 @@ Observação: Converter valores para numerais ou deixar formatado como vem do WS
     + contrato: `02313071286` (required, string) - Numero do contratato do devedor.
 
 
-### Consultar Propostas [GET]
+### Consultar propostas do contrato com o credor [GET]
+Retorna as propostas ofertadas para o contrato.
+
+Esse método só deve ser chamado quando o o campo `permiteProposta` for `true`
 + Parameters
     + vencimento: `25/11/2023` (string, optional) - Data de vencimento desejada.
 
@@ -349,7 +366,10 @@ Observação: Converter valores para numerais ou deixar formatado como vem do WS
     + contrato: `02313071286` (required, string) - Numero do contratato do devedor.
 
 
-### Consultar Acordos [GET]
+### Consultar acordos do contrato com o credor [GET]
+Retorna os acordos em andamento.
+
+Esse método só deve ser chamado quando o o campo `permiteAcordo` for `true`
 + Request
     + Headers
 
@@ -384,7 +404,8 @@ Observação: Converter valores para numerais ou deixar formatado como vem do WS
 
 
 ## Boletos [/api/v1/boletos/gerar]
-### Gerar Boleto [POST]
+### Gerar boleto [POST]
+Esse método faz a efetivação da solicitação de um acordo ou segunda via.
 + Request modo acordo
     + Headers
 
@@ -443,7 +464,8 @@ Observação: Converter valores para numerais ou deixar formatado como vem do WS
             }
 
 ## Boletos [/api/v1/boletos/emitir]
-### Emitir Boleto [POST]
+### Emitir boleto [POST]
+Esse método retorna o boleto gerado em PDF e sua linha digitável.
 + Request modo acordo
     + Headers
 
