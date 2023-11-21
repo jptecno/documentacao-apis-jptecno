@@ -53,7 +53,7 @@ Retorna uma lista com clientes para serem acionados.
     + cpfcnpf: `02313071286` (required, string) - CPF/CNPJ do devedor.
 
 ### Consultar débitos por CPF/CNPJ [GET]
-Retorna débitos do cliente e seus credores.
+Retorna débitos do cliente e seus credores por CPF/CNPJ.
 
 + Request
     + Headers 
@@ -112,7 +112,7 @@ Retorna débitos do cliente e seus credores.
     + credor: 2002 (required, number) - CPF/CNPJ do devedor.
 
 ### Consultar dados do devedor [GET]
-Retorna todos os dados do devedor.
+Retorna todos os dados do devedor com o credor.
 
 + Request
     + Headers
@@ -187,8 +187,8 @@ Retorna todos os dados do devedor.
     + cpfcnpf: `02313071286` (required, string) - CPF/CNPJ do devedor.
     + credor: 2002 (required, number) - Credor em qual o devedor tem débitos.
 
-### Consultar contratos com o credor [GET]
-Retorna dados sobre os contratos vigentes do devedor.
+### Consultar contratos [GET]
+Retorna dados sobre os contratos vigentes do devedor com o credor.
 
 + Request
     + Headers 
@@ -235,8 +235,8 @@ Retorna dados sobre os contratos vigentes do devedor.
     + credor: 2002 (required, number) - Credor em qual o devedor tem débitos.
     + contrato: `02313071286` (required, string) - Numero do contratato do devedor.
 
-### Consultar dívidas do contrato com o credor [GET]
-Retorna as dívidas e parcelas do contrato.
+### Consultar dívidas [GET]
+Retorna as dívidas e parcelas do contrato do contrato com o credor.
 
 Esse método só deverá ser chamado quando o campo `permiteDivida` for `true`
 
@@ -294,8 +294,8 @@ Esse método só deverá ser chamado quando o campo `permiteDivida` for `true`
     + contrato: `02313071286` (required, string) - Numero do contratato do devedor.
 
 
-### Consultar propostas do contrato com o credor [GET]
-Retorna as propostas ofertadas para o contrato.
+### Consultar propostas [GET]
+Retorna as propostas ofertadas para o contrato do contrato com o credor.
 
 Esse método só deverá ser chamado quando o campo `permiteProposta` for `true`
 
@@ -365,8 +365,8 @@ Esse método só deverá ser chamado quando o campo `permiteProposta` for `true`
     + contrato: `02313071286` (required, string) - Numero do contratato do devedor.
 
 
-### Consultar acordos do contrato com o credor [GET]
-Retorna os acordos em andamento.
+### Consultar acordos [GET]
+Retorna os acordos em andamento do contrato com o credor.
 
 Esse método só deverá ser chamado quando o campo `permiteAcordo` for `true`
 
@@ -535,6 +535,8 @@ Esse método retorna o boleto gerado em PDF e sua linha digitável.
     + credor: 2002 (required, number) - Código do credor.
     + tipoLegenda: `SITCOB` (required, string) - Tipo de legenda.
 ### Consultar Legenda [GET]
+Retorna legendas de acordo com o tipo.
+
 + Request
     + Headers
 
@@ -604,7 +606,9 @@ Esse método retorna o boleto gerado em PDF e sua linha digitável.
 + Parameters
     + idVendedor: 12345 (number, required) - Id do vendedor a ser consultado.
 
-### Consultar resultados diários vendedor [GET]
+### Consultar dia vendedor [GET]
+Retorna os resultados diários do vendedor.
+
 + Request
     + Headers
 
@@ -656,7 +660,9 @@ Esse método retorna o boleto gerado em PDF e sua linha digitável.
 ## Diario Loja [/api/v1/dashboard/diario/loja/{idLoja}]
 + Parameters
     + idLoja: 12345 (number, required) - Id da loja a ser consultada.
-### Consultar resultados diários loja [GET]
+### Consultar dia loja [GET]
+Retorna os resultados diários da loja.
+
 + Request
     + Headers
 
@@ -732,7 +738,9 @@ Esse método retorna o boleto gerado em PDF e sua linha digitável.
 ## Diario Regional [/api/v1/dashboard/diario/regional/{idRegional}]
 + Parameters
     + idRegional: 12345 (number, required) - Id da regional a ser consultada.
-### Consultar resultados diários regional [GET]
+### Consultar dia regional [GET]
+Retorna os resultados diários da regional.
+
 + Request
     + Headers
 
@@ -803,7 +811,9 @@ Esse método retorna o boleto gerado em PDF e sua linha digitável.
             }
         
 ## Diario Matriz [/api/v1/dashboard/diario/matriz]
-### Consultar resultados diários matriz [GET]
+### Consultar dia matriz [GET]
+Retorna os resultados diários da matriz.
+
 + Request
     + Headers
 
@@ -872,7 +882,9 @@ Esse método retorna o boleto gerado em PDF e sua linha digitável.
 ## Mensal Vendedor [/api/v1/dashboard/mensal/vendedor/{idVendedor}]
 + Parameters
     + idVendedor: 12345 (number, required) - Id do vendedor a ser consultado.
-### Consultar resultados diários vendedor [GET]
+### Consultar mês vendedor [GET]
+Retorna os resultados mensal do vendedor.
+
 + Request
     + Headers
 
@@ -927,7 +939,9 @@ Esse método retorna o boleto gerado em PDF e sua linha digitável.
 ## Mensal Loja [/api/v1/dashboard/mensal/loja/{idLoja}]
 + Parameters
     + idLoja: 12345 (number, required) - Id da loja a ser consultada.
-### Consultar resultados diários loja [GET]
+### Consultar mês loja [GET]
+Retorna os resultados mensal da loja.
+
 + Request
     + Headers
 
@@ -1002,7 +1016,9 @@ Esse método retorna o boleto gerado em PDF e sua linha digitável.
 ## Mensal Regional [/api/v1/dashboard/mensal/regional/{idRegional}]
 + Parameters
     + idRegional: 12345 (number, required) - Id da regional a ser consultada.
-### Consultar resultados diários regional [GET]
+### Consultar mês regional [GET]
+Retorna os resultados mensal da regional.
+
 + Request
     + Headers
 
@@ -1073,7 +1089,9 @@ Esse método retorna o boleto gerado em PDF e sua linha digitável.
 
 
 ## Diario Matriz [/api/v1/dashboard/mensal/matriz]
-### Consultar resultados diários matriz [GET]
+### Consultar mês matriz [GET]
+Retorna os resultados mensal da matriz.
+
 + Request
     + Headers
 
