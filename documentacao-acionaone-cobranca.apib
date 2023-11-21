@@ -1,0 +1,1116 @@
+FORMAT: 1A
+
+# API do aplicativo Aciona One
+
+API de cobrança do Aciona One.
+
+
+# Group Cobrança
+
+## Fila de Cobrança [/api/v1/cobranca/fila]
+### Consultar Fila [GET]
++ Request
+    + Headers 
+
+            Application: ACIONA_ONE
+            Authorization: Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio
+
++ Response 200
+    + Body
+
+            {
+                "erro": false, 
+                "mensagem": "sucesso",
+                "data": [
+                    {
+                        "idFila": 1,
+                        "cliente": "Nome do Cliente A",
+                        "cpfCnpj": "123.456.789-01",
+                        "idCliente": 12345
+                    },
+                    {
+                        "idFila": 2,
+                        "cliente": " Nome do Cliente B",
+                        "cpfCnpj": "987.654.321-00",
+                        "idCliente": 67890
+                    },
+                    {
+                        "idFila": 3,
+                        "cliente": " Nome do Cliente C",
+                        "cpfCnpj": "111.222.333-44",
+                        "idCliente": 54321
+                    }
+                ]
+            }
+
+
+## Débitos [/api/v1/debitos/{cpfcnpf}]
++ Parameters
+    + cpfcnpf: `02313071286` (required, string) - CPF/CNPJ do devedor.
+
+### Consultar Débitos [GET]
++ Request
+    + Headers 
+
+            Application: ACIONA_ONE
+            Authorization: Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio
+
++ Response 200
+    + Body
+
+            {
+                "erro": false,
+                "mensagem": "sucesso",
+                "data": {
+                    "credores": [
+                        {
+                            "agrupador": 30029,
+                            "codcontratante": 4,
+                            "logomarca": "https://cliqueupfiles.s3.us-west-2.amazonaws.com/imagens/logos/credores/gazin.png",
+                            "nomcontratante": "LOJAS GAZIN",
+                            "parcelasIndividuaisSequenciais": true,
+                            "url": "http://200.201.209.166:8999/boletoweb/wscdlsrv.dll/wsdl/Iservico",
+                            "credorCrm": 2002,
+                            "pagamento": [
+                                {
+                                    "idTipoPagamento": 1,
+                                    "pagamentoInterno": true,
+                                    "pagamentoProposta": true,
+                                    "tipoPagamento": "boleto"
+                                },
+                                {
+                                    "idTipoPagamento": 4,
+                                    "pagamentoInterno": true,
+                                    "pagamentoProposta": true,
+                                    "tipoPagamento": "pix"
+                                }
+                            ]
+                        }
+                    ],
+                    "nome": "daniela oliveira da silva"
+                }
+            }
+
+
++ Response 500 
+    + Body
+
+            {
+                "erro": true,
+                "mensagem": "Erro interno"
+            }
+
+## Devedor [/api/v1/devedor/{cpfcnpf}/{credor}]
++ Parameters
+    + cpfcnpf: `02313071286` (required, string) - CPF/CNPJ do devedor.
+    + credor: 2002 (required, number) - CPF/CNPJ do devedor.
+
+### Consultar Devedor [GET]
++ Request
+    + Headers
+
+            Application: ACIONA_ONE
+            Authorization: Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio
+    
++ Response 200
+    + Body
+
+            {
+                "erro": false,
+                "mensagem": "sucesso",
+                "data": {
+                    "cpfCnpj": "023.130.712-86",
+                    "nome": "ELIZANGELA SILVA DA ROCHA",
+                    "nascimento": "15/09/1993",
+                    "emails": [
+                    {
+                        "email": "joao.paulostz2@hotmail.com",
+                        "tipoEmail": 1,
+                        "situacaoEmail": "invalido",
+                        "origemEmail": "ENRIQUECIMENTO",
+                        "idEmail": 691334
+                    }
+                    ],
+                    "enderecos": [
+                    {
+                        "logradouro": "AV. MATO GROSSO",
+                        "numero": "581",
+                        "bairro": "CASCALHINHO",
+                        "cidade": "RONDONOPOLIS",
+                        "estado": "RO",
+                        "cep": "78752000",
+                        "complemento": "RONDONOPOLIS",
+                        "tipoLogradouro": 1,
+                        "tipoEndereco": 1,
+                        "cobranca": "",
+                        "ultimaAtualizacao": "",
+                        "idEndereco": 1
+                    }
+                    ],
+
+                    "telefones": [
+                    {
+                        "idTelefone": 1499525,
+                        "tipoTelefone": "Movel Referencia",
+                        "telefone": "69992193570",
+                        "whatsapp": false,
+                        "ultimaAtualizacao": "",
+                        "situacaoTelefone": "Invalido",
+                        "origemTelefone": "Remessa",
+                        "ramal": "",
+                        "referencia": "",
+                        "tipoReferencia": ""
+                    }
+                    ]
+                }
+            }
+
+
++ Response 500 
+    + Body
+
+            {
+                "erro": true,
+                "mensagem": "Erro interno"
+            }
+
+## Contratos [/api/v1/contratos/{cpfcnpf}/{credor}]
++ Parameters
+    + cpfcnpf: `02313071286` (required, string) - CPF/CNPJ do devedor.
+    + credor: 2002 (required, number) - Credor em qual o devedor tem débitos.
+
+### Consultar Contratos [GET]
++ Request
+    + Headers 
+
+            Application: ACIONA_ONE
+            Authorization: Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio
+    
+
++ Response 200
+    + Body
+
+            {
+                "erro": false,
+                "mensagem": "sucesso",
+                "data": {
+                    "contratos": [
+                        {
+                            "codcredor": "2002",
+                            "numcontrato": "02523992264",
+                            "permiteacordo": true,
+                            "permitedivida": true,
+                            "permiteproposta": false,
+                            "situacao": "Acordo em andamento",
+                            "valorprincipal": "R$ 833,10",
+                            "vencimento": "24/11/2023",
+                            "quantidadeParcelas": 1
+                        }
+                    ]
+                }
+            }
+
+
++ Response 500 
+    + Body
+
+            {
+                "erro": true,
+                "mensagem": "Erro interno"
+            }
+
+## Dívidas [/api/v1/dividas/{cpfcnpf}/{credor}/{contrato}]
++ Parameters
+    + cpfcnpf: `02313071286` (required, string) - CPF/CNPJ do devedor.
+    + credor: 2002 (required, number) - Credor em qual o devedor tem débitos.
+    + contrato: `02313071286` (required, string) - Numero do contratato do devedor.
+
+### Consultar Dívidas [GET]
+Observação: Converter valores para numerais ou deixar formatado como vem do WS? 
+
++ Request
+    + Headers
+
+            Application: ACIONA_ONE
+            Authorization: Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio
+
+    
++ Response 200
+    + Body
+
+            {
+                "erro": false,
+                "mensagem": "sucesso",
+                "data": {
+                    "dividas": [
+                        {
+                            "id": "20.03.2007_03205248333",
+                            "contrato": "03205248333",
+                            "vencimento": "20/03/2007",
+                            "referencia": "03/2007",
+                            "valorPago": "134,29",
+                            "desconto": "1.883,69",
+                            "multa": "2,69",
+                            "juros": "1.881,00",
+                            "valorPrincipal": "2.017,98",
+                            "parcelaFutura": false,
+                            "validade": "21/11/2023",
+                            "dataMaxVencimento": "21/11/2023"
+                        },
+                        {
+                            "id": "20.04.2007_03205248333",
+                            "contrato": "03205248333",
+                            "vencimento": "20/04/2007",
+                            "referencia": "04/2007",
+                            "valorPago": "134,29",
+                            "desconto": "1.874,12",
+                            "multa": "2,69",
+                            "juros": "1.871,43",
+                            "valorPrincipal": "2.008,41",
+                            "parcelaFutura": false,
+                            "validade": "21/11/2023",
+                            "dataMaxVencimento": "21/11/2023"
+                        }
+                    ]
+                }
+            }
+
+## Propostas [/api/v1/propostas/{cpfcnpf}/{credor}/{contrato}{?vencimento}]
++ Parameters
+    + cpfcnpf: `02313071286` (required, string) - CPF/CNPJ do devedor.
+    + credor: 2002 (required, number) - Credor em qual o devedor tem débitos.
+    + contrato: `02313071286` (required, string) - Numero do contratato do devedor.
+
+
+### Consultar Propostas [GET]
++ Parameters
+    + vencimento: `25/11/2023` (string, optional) - Data de vencimento desejada.
+
++ Request
+    + Headers
+
+            Application: ACIONA_ONE
+            Authorization: Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio
+
++ Response 200
+    + Body
+
+            {
+                "erro": false,
+                "mensagem": "sucesso",
+                "data": {
+                    "propostas": [
+                        {
+                            "id": "8751695",
+                            "dataMaxVencimento": "28/11/2023",
+                            "descricao": "Proposta À Vista....:   R$  7315,93",
+                            "valorCorrigido": "134.038,73",
+                            "valorDesconto": "126.722,80",
+                            "valorEntrada": "7.315,93",
+                            "valorPago": "7.315,93",
+                            "valorParcela": "7.315,93",
+                            "valorPrincipal": "0,00",
+                            "vencimento": "28/11/2023",
+                            "parcelasFuturas": false,
+                            "porcentagemDesconto": "94,54%",
+                            "prestacoes": [
+                                {
+                                    "id": "6211358_01/07/2021",
+                                    "dataVencimento": "01/07/2021",
+                                    "mesReferencia": "07/2021",
+                                    "numContrato": "6211358",
+                                    "numeroParcela": "",
+                                    "valorPago": "1.593,45",
+                                    "valorPrincipal": "1.593,45"
+                                },
+                                {
+                                    "id": "6217531_11/07/2021",
+                                    "dataVencimento": "11/07/2021",
+                                    "mesReferencia": "07/2021",
+                                    "numContrato": "6217531",
+                                    "numeroParcela": "",
+                                    "valorPago": "5.226,15",
+                                    "valorPrincipal": "5.226,15"
+                                },
+                                
+                            ],
+                            "quantidadeParcelas": "0",
+                            "tipo": "AV",
+                            "valorTotal": "7.315,93"
+                        }
+                    ]
+                }
+            }
+
+## Acordos [/api/v1/Acordos/{cpfcnpf}/{credor}/{contrato}]
++ Parameters
+    + cpfcnpf: `02313071286` (required, string) - CPF/CNPJ do devedor.
+    + credor: 2002 (required, number) - Credor em qual o devedor tem débitos.
+    + contrato: `02313071286` (required, string) - Numero do contratato do devedor.
+
+
+### Consultar Acordos [GET]
++ Request
+    + Headers
+
+            Application: ACIONA_ONE
+            Authorization: Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio
+
++ Response 200
+    + Body
+
+            {
+                "erro": false,
+                "mensagem": "sucesso",
+                "data": {
+                    "acordo": {
+                        "codigoAcordo": "40005",
+                        "contrato": "02523992264",
+                        "dataAcordo": "18/11/2023",
+                        "tipo": "AV",
+                        "parcelasAcordo": [
+                            {
+                                "dataVencimento": "24/11/2023",
+                                "id": "1",
+                                "valorPago": "833,10",
+                                "status": "EM ABERTO",
+                                "numero": 1
+                            }
+                        ],
+                        "formaPagamento": 1
+                    }
+                }
+            }
+
+
+## Boletos [/api/v1/boletos/gerar]
+### Gerar Boleto [POST]
++ Request modo acordo
+    + Headers
+
+            Application: ACIONA_ONE
+            Authorization: Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio
+    + Body
+    
+            {
+                "modo": "0",
+                "cpfCnpj": "02523992264",
+                "credor": "2002",
+                "contrato": "02523992264"
+            }
+
++ Request modo proposta
+    + Headers
+
+            Application: ACIONA_ONE
+            Authorization: Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio
+    + Body
+    
+            {
+                "modo": "1",
+                "cpfCnpj": "02523992264",
+                "credor": "2002",
+                "contrato": "02523992264",
+                "idproposta": "9798324"
+            }
+
++ Request modo divida
+    + Headers
+
+            Application: ACIONA_ONE
+            Authorization: Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio
+    + Body
+    
+            {
+                "modo": "2",
+                "cpfCnpj": "02523992264",
+                "credor": "2002",
+                "contrato": "02523992264",
+                "idproposta": "9798324"
+            }
+            
++ Response 200
+    + Body
+
+            {
+                "erro": false,
+                "mensagem": "sucesso",
+                "data": {
+                    "boleto": {
+                        "nossonumero": "8738414"
+                    }
+                }
+            }
+
+## Boletos [/api/v1/boletos/emitir]
+### Emitir Boleto [POST]
++ Request modo acordo
+    + Headers
+
+            Application: ACIONA_ONE
+            Authorization: Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio
+    + Body
+    
+            {
+                "modo": "0",
+                "cpfCnpj": "02523992264",
+                "credor": "2002",
+                "contrato": "02523992264"
+            }
+
+
++ Request modo proposta
+    + Headers
+
+            Application: ACIONA_ONE
+            Authorization: Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio
+    + Body
+    
+            {
+                "modo": "1",
+                "cpfCnpj": "02523992264",
+                "credor": "2002",
+                "contrato": "02523992264",
+                "idproposta": "9798324"
+            }
+
++ Request modo divida
+    + Headers
+
+            Application: ACIONA_ONE
+            Authorization: Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio
+    + Body
+    
+            {
+                "modo": "2",
+                "cpfCnpj": "02523992264",
+                "credor": "2002",
+                "contrato": "02523992264",
+                "idproposta": "9798324"
+            }
+
++ Response 200
+    + Body 
+
+            {
+                "erro": false,
+                "mensagem": "sucesso",
+                "data": {
+                    "boletos": [
+                        {
+                            "url": "https://link.dsb.gl/655c37b764053400081a5b6d",
+                            "linhaDigitavel": "23793099059000011843168000264603195440000083310"
+                        }
+                    ],
+                    "nossonumero": "8738414"
+                }
+            }
+
+## Legendas [/api/v1/legendas/{credor}/{tipoLegenda}]
++ Parameters
+    + credor: 2002 (required, number) - Código do credor.
+    + tipoLegenda: `SITCOB` (required, string) - Tipo de legenda.
+### Consultar Legenda [GET]
++ Request
+    + Headers
+
+            Application: ACIONA_ONE
+            Authorization: Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio
+
++ Response 200
+    + Body
+
+            {
+                "erro": false,
+                "mensagem": "sucesso",
+                "data": [
+                    {
+                    "id": "1",
+                    "descricao": "PROPOSTA RENEG ENVIADA",
+                    "permiteagendamento": "false"
+                    },
+                    {
+                    "id": "8",
+                    "descricao": "TELEFONEMA AO CLIENTE",
+                    "permiteagendamento": "false"
+                    },
+                    {
+                    "id": "22",
+                    "descricao": "TELEFONEMA AO CLIENTE - COM RECADO",
+                    "permiteagendamento": "false"
+                    },
+                    {
+                    "id": "23",
+                    "descricao": "LIGACAO SEM ATENDIMENTO",
+                    "permiteagendamento": "false"
+                    },
+                    {
+                    "id": "27",
+                    "descricao": "CLIENTE INFORMOU PAGTO",
+                    "permiteagendamento": "false"
+                    },
+                    {
+                    "id": "29",
+                    "descricao": "CONTRATO P/ ANALISE SUPERVISAO",
+                    "permiteagendamento": "false"
+                    },
+                    {
+                    "id": "35",
+                    "descricao": "ACIONAMENTO PROGRAMADO",
+                    "permiteagendamento": "true"
+                    },
+                    {
+                    "id": "36",
+                    "descricao": "SOLICITA RETORNO - SEM IDENTIFICACAO CPC",
+                    "permiteagendamento": "true"
+                    },
+                    {
+                    "id": "37",
+                    "descricao": "PARCELAMENTO / SIMULACAO",
+                    "permiteagendamento": "false"
+                    }
+                ]
+            }
+
+
+
+# Group Dashboard
+
+## Diario Vendedor [/api/v1/dashboard/diario/vendedor/{idVendedor}]
++ Parameters
+    + idVendedor: 12345 (number, required) - Id do vendedor a ser consultado.
+
+### Consultar resultados diários vendedor [GET]
++ Request
+    + Headers
+
+            Application: ACIONA_ONE
+            Authorization: Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio
++ Response 200
+    + Body
+
+            {
+                "erro": false,
+                "mensagem": "sucesso",
+                "data": {
+                    "idUsuario": 123,
+                    "nomeUsuario": "Maria Silva",
+                    "data": "2023-09-25",
+                    "idLoja": 456,
+                    "idRegional": 789,
+                    "percentualAcesso": 100.0,
+                    "rankingLoja": 5,
+                    "rankingRegional": 10,
+                    "rankingGeral": 16,
+                    "producao": {
+                        "quantidadeFila": 150,
+                        "valorVencido": 12000.0,
+                        "valorAVencer": 25000.0,
+                        "total": 37000.0,
+                        "acionados": 100,
+                        "naoAcionados": 50,
+                        "insucesso": 10,
+                        "recado": 5,
+                        "acordos": 20,
+                        "quantidadeAcordos": 15,
+                        "valorAV": 5000.0,
+                        "valorEntrada": 1500.0,
+                        "valorTotal": 6500.0,
+                        "quantidadePix": 8,
+                        "quantidadePagamentoLoja": 10,
+                        "horaProcessamento": "14:30:00"
+                    },
+                    "pagamentos": {
+                        "quantidade": 25,
+                        "valor": 18000.0,
+                        "meta": 20000.0,
+                        "efetividade": 90.0
+                    }
+                }
+            }
+
+## Diario Loja [/api/v1/dashboard/diario/loja/{idLoja}]
++ Parameters
+    + idLoja: 12345 (number, required) - Id da loja a ser consultada.
+### Consultar resultados diários loja [GET]
++ Request
+    + Headers
+
+            Application: ACIONA_ONE
+            Authorization: Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio
+
++ Response 200
+    + Body
+
+            {
+                "erro": false,
+                "mensagem": "sucesso",
+                "data": {
+                    "idLoja": 123,
+                    "loja": "Loja Exemplo",
+                    "gerente": "João Silva",
+                    "data": "2023-09-25",
+                    "idRegional": 456,
+                    "regional": "Regional Exemplo",
+                    "percentualAcesso": 100.0,
+                    "rankingRegional": 5,
+                    "rankingGeral": 16,
+                    "producao": {
+                        "quantidadeVendedores": 200,
+                        "quantidadeVendAcionamentos": 120,
+                        "quantidadeFila": 150,
+                        "valorVencido": 12000.0,
+                        "valorAVencer": 25000.0,
+                        "total": 37000.0,
+                        "acionados": 100,
+                        "naoAcionados": 50,
+                        "insucesso": 10,
+                        "recado": 5,
+                        "acordos": 20,
+                        "quantidadeAcordos": 15,
+                        "valorAV": 5000.0,
+                        "valorEntrada": 1500.0,
+                        "valorTotal": 6500.0,
+                        "quantidadePix": 8,
+                        "quantidadePagamentosLoja": 10,
+                        "horaProcessamento": "14:30:00"
+                    },
+                    "pagamentos": {
+                        "quantidadePagamentos": 25,
+                        "valorPagamentos": 18000.0,
+                        "meta": 20000.0,
+                        "efetividade": 90.0
+                    },
+                    "rankingArrecadacao": [
+                        {
+                            "idVendedor": 1,
+                            "vendedor": "Maria Santos",
+                            "valorPagamentos": 8000.0,
+                            "efetividade": 80.0
+                        },
+                        {
+                            "idVendedor": 2,
+                            "vendedor": "Carlos Oliveira",
+                            "valorPagamentos": 6000.0,
+                            "efetividade": 60.0
+                        },
+                        {
+                            "idVendedor": 3,
+                            "vendedor": "Ana Lima",
+                            "valorPagamentos": 4500.0,
+                            "efetividade": 45.0
+                        }
+                    ]
+                }
+            }
+
+
+## Diario Regional [/api/v1/dashboard/diario/regional/{idRegional}]
++ Parameters
+    + idRegional: 12345 (number, required) - Id da regional a ser consultada.
+### Consultar resultados diários regional [GET]
++ Request
+    + Headers
+
+            Application: ACIONA_ONE
+            Authorization: Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio
+
++ Response 200
+    + Body
+
+            {
+                "erro": false,
+                "mensagem": "sucesso",
+                "data": {
+                    "idRegional": 123,
+                    "regional": "Regional Exemplo",
+                    "gerente": "João Silva",
+                    "data": "2023-09-25",
+                    "percentualAcesso": 100.0,
+                    "rankingGeral": 16,
+                    "producao": {
+                        "quantidadeVendedores": 200,
+                        "quantidadeVendAcionamentos": 120,
+                        "quantidadeFila": 150,
+                        "valorVencido": 12000.0,
+                        "valorAVencer": 25000.0,
+                        "total": 37000.0,
+                        "acionados": 100,
+                        "naoAcionados": 50,
+                        "insucesso": 10,
+                        "recado": 5,
+                        "acordos": 20,
+                        "quantidadeAcordos": 15,
+                        "valorAV": 5000.0,
+                        "valorEntrada": 1500.0,
+                        "valorTotal": 6500.0,
+                        "quantidadePix": 8,
+                        "quantidadePagamentosLoja": 10,
+                        "horaProcessamento": "14:30:00"
+                    },
+                    "pagamentos": {
+                        "quantidadePagamentos": 25,
+                        "valorPagamentos": 18000.0,
+                        "meta": 20000.0,
+                        "efetividade": 90.0
+
+                    },
+                    "rankingArrecadacao": [
+                        {
+                            "idLoja": 1,
+                            "loja": " Nome Loja 1",
+                            "vlrPagamentos": 8000.0,
+                            "efetividade": 80.0
+                        },
+                        {
+                            "idLoja": 2,
+                            "loja": " Nome Loja 2",
+                            "vlrPagamentos": 6000.0,
+                            "efetividade": 60.0
+                        },
+                        {
+                            "idLoja": 3,
+                            "loja": " Nome Loja 3",
+                            "vlrPagamentos": 4500.0,
+                            "efetividade": 45.0
+                        }
+                    ]
+                }
+            }
+        
+## Diario Matriz [/api/v1/dashboard/diario/matriz]
+### Consultar resultados diários matriz [GET]
++ Request
+    + Headers
+
+            Application: ACIONA_ONE
+            Authorization: Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio
+
++ Response 200
+    + Body
+
+            {
+                "mensagem": "sucesso.",
+                "data": {
+                    "gerente": "João Silva",
+                    "data": "2023-09-25",
+                    "percentualAcesso": 100.0,
+                    "producao": {
+                        "quantidadeVendedores": 200,
+                        "quantidadeVendAcionamentos": 120,
+                        "quantidadeFila": 150,
+                        "valorVencido": 12000.0,
+                        "valorAVencer": 25000.0,
+                        "total": 37000.0,
+                        "acionados": 100,
+                        "naoAcionados": 50,
+                        "insucesso": 10,
+                        "recado": 5,
+                        "acordos": 20,
+                        "quantidadeAcordos": 15,
+                        "valorAV": 5000.0,
+                        "valorEntrada": 1500.0,
+                        "valorTotal": 6500.0,
+                        "quantidadePix": 8,
+                        "quantidadePagamentosLoja": 10,
+                        "horaProcessamento": "14:30:00"
+                    },
+                    "pagamentos": {
+                        "quantidadePagamentos": 25,
+                        "valorPagamentos": 18000.0,
+                        "meta": 20000.0,
+                        "efetividade": 90.0
+                    },
+                    "rankingArrecadacao": [
+                        {
+                            "idRegional": 1,
+                            "regional": " Nome Regional 1",
+                            "valorPagamentos": 8000.0,
+                            "efetividade": 80.0
+                        },
+                        {
+                            "idRegional": 2,
+                            "regional": " Nome Regional 2",
+                            "valorPagamentos": 6000.0,
+                            "efetividade": 60.0
+                        },
+                        {
+                            "idRegional": 3,
+                            "regional": " Nome Regional 3",
+                            "valorPagamentos": 4500.0,
+                            "efetividade": 45.0
+                        }
+                    ]
+                }
+            }
+
+
+## Mensal Vendedor [/api/v1/dashboard/mensal/vendedor/{idVendedor}]
++ Parameters
+    + idVendedor: 12345 (number, required) - Id do vendedor a ser consultado.
+### Consultar resultados diários vendedor [GET]
++ Request
+    + Headers
+
+            Application: ACIONA_ONE
+            Authorization: Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio
+
++ Response 200
+    + Body
+
+            {
+                "erro": false,
+                "mensagem": "sucesso",
+                "data": {
+                    "idUsuario": 123,
+                    "nomeUsuario": "Maria Silva",
+                    "mesAno": "2023-09",
+                    "idLoja": 456,
+                    "loja": "Nome Loja",
+                    "idRegional": 789,
+                    "regional": "Nome Regional",
+                    "rankingLoja": 5,
+                    "rankingRegional": 10,
+                    "rankingGeral": 16,
+                    "producao": {
+                        "quantidadeFila": 150,
+                        "valorVencidoMsd": 12000.0,
+                        "valorAVencerMsd": 25000.0,
+                        "msdTotal": 37000.0,
+                        "acionados": 100,
+                        "naoAcionados": 50,
+                        "insucesso": 10,
+                        "recado": 5,
+                        "acordos": 18,
+                        "quantidadeLogin": 25,
+                        "quantidadeAcordos": 15,
+                        "valorAV": 5000.0,
+                        "valorEntrada": 1500.0,
+                        "valorTotal": 6500.0,
+                        "quantidadePix": 8,
+                        "quantidadePagamentosLoja": 10,
+                        "horaProcessamento": "14:30:00"
+                    },
+                    "pagamentos": {
+                        "quantidadePagamentos": 25,
+                        "valorPagamentos": 18000.0,
+                        "meta": 20000.0,
+                        "efetividade": 90.00
+                    }
+                }
+            }
+
+## Mensal Loja [/api/v1/dashboard/mensal/loja/{idLoja}]
++ Parameters
+    + idLoja: 12345 (number, required) - Id da loja a ser consultada.
+### Consultar resultados diários loja [GET]
++ Request
+    + Headers
+
+            Application: ACIONA_ONE
+            Authorization: Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio
+
++ Response 200
+    + Body
+
+            {
+                "erro": false,
+                "mensagem": "sucesso",
+                "data": {
+                    "idLoja": 123,
+                    "loja": "Loja Exemplo",
+                    "gerente": "João Silva",
+                    "mesAno": "2023-09",
+                    "idRegional": 456,
+                    "percentualAcesso": 85.0,
+                    "rankingRegional": 5,
+                    "rankingGeral": 16,
+                    "producao": {
+                        "quantidadeVendedores": 200,
+                        "quantidadeVendAcionamentos": 120,
+                        "quantidadeFila": 150,
+                        "valorVencidoMsd": 12000.0,
+                        "valorAVencerMsd": 25000.0,
+                        "msdTotal": 37000.0,
+                        "acionados": 100,
+                        "naoAcionados": 50,
+                        "insucesso": 10,
+                        "recado": 5,
+                        "acordos": 20,
+                        "quantidadeAcordos": 15,
+                        "valorAV": 5000.0,
+                        "valorEntrada": 1500.0,
+                        "valorTotal": 6500.0,
+                        "quantidadePix": 8,
+                        "quantidadePagamentosLoja": 10,
+                        "horaProcessamento": "14:30:00"
+                    },
+                    "pagamentos": {
+                        "quantidadePagamentos": 25,
+                        "valorPagamentos": 18000.0,
+                        "meta": 20000.0,
+                        "efetividade": 90.0
+                    },
+                    "rankingArrecadacao": [
+                        {
+                            "idVendedor": 1,
+                            "vendedor": "Maria Santos",
+                            "valorPagamentos": 8000.0,
+                            "efetividade": 80.0
+                        },
+                        {
+                            "idVendedor": 2,
+                            "vendedor": "Carlos Oliveira",
+                            "valorPagamentos": 6000.0,
+                            "efetividade": 60.0
+                        },
+                        {
+                            "idVendedor": 3,
+                            "vendedor": "Ana Lima",
+                            "valorPagamentos": 4500.0,
+                            "efetividade": 45.0
+                        }
+                    ]
+                }
+            }
+
+
+## Mensal Regional [/api/v1/dashboard/mensal/regional/{idRegional}]
++ Parameters
+    + idRegional: 12345 (number, required) - Id da regional a ser consultada.
+### Consultar resultados diários regional [GET]
++ Request
+    + Headers
+
+            Application: ACIONA_ONE
+            Authorization: Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio
+
++ Response 200
+    + Body
+
+            {
+                "erro": false,
+                "mensagem": "sucesso",
+                "data": {
+                    "idRegional": 123,
+                    "regional": "Loja Exemplo",
+                    "gerente": "João Silva",
+                    "mesAno": "2023-09",
+                    "percentualAcesso": 85.0,
+                    "rankingGeral": 16,
+                    "producao": {
+                    "quantidadeVendedores": 200,
+                    "quantidadeVendAcionamentos": 120,
+                    "quantidadeFila": 150,
+                    "valorVencidoMsd": 12000.0,
+                    "valorAVencerMsd": 25000.0,
+                    "msdTotal": 37000.0,
+                    "acionados": 100,
+                    "naoAcionados": 50,
+                    "insucesso": 10,
+                    "recado": 5,
+                    "acordos": 20,
+                    "quantidadeAcordos": 15,
+                    "valorAV": 5000.0,
+                    "valorEntrada": 1500.0,
+                    "valorTotal": 6500.0,
+                    "quantidadePix": 8,
+                    "quantidadePagamentosLoja": 10,
+                    "horaProcessamento": "14:30:00"
+                    },
+                    "pagamentos": {
+                    "quantidadePagamentos": 25,
+                    "valorPagamentos": 18000.0,
+                    "meta": 20000.0,
+                    "efetividade": 90.0
+                    },
+                    "rankingArrecadacao": [
+                    {
+                        "idLoja": 1,
+                        "loja": "Nome Loja 1",
+                        "valorPagamentos": 8000.0,
+                        "efetividade": 80.0
+                    },
+                    {
+                        "idLoja": 2,
+                        "loja": " Nome Loja 2",
+                        "valorPagamentos": 6000.0,
+                        "efetividade": 60.0
+                    },
+                    {
+                        "idLoja": 3,
+                        "loja": " Nome Loja 3",
+                        "valorPagamentos": 4500.0,
+                        "efetividade": 45.0
+                    }
+                    ]
+                }
+                }
+
+
+## Diario Matriz [/api/v1/dashboard/mensal/matriz]
+### Consultar resultados diários matriz [GET]
++ Request
+    + Headers
+
+            Application: ACIONA_ONE
+            Authorization: Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio
+
++ Response 200
+    + Body
+
+            {
+                "erro": false,
+                "mensagem": "sucesso.",
+                "data": {
+                    "gerente": "João Silva",
+                    "mesAno": "2023-09",
+                    "login": 85.0,
+                    "producao": {
+                        "quantidadeVendedores": 200,
+                        "quantidadeVendAcionamentos": 120,
+                        "quantidadeFila": 150,
+                        "valorVencidoMsd": 12000.0,
+                        "valorAVencerMsd": 25000.0,
+                        "msdTotal": 37000.0,
+                        "acionados": 100,
+                        "naoAcionados": 50,
+                        "insucesso": 10,
+                        "recado": 5,
+                        "acordos": 20,
+                        "quantidadeAcordos": 15,
+                        "valorAV": 5000.0,
+                        "valorEntrada": 1500.0,
+                        "valorTotal": 6500.0,
+                        "quantidadePix": 8,
+                        "quantidadePagamentosLoja": 10,
+                        "horaProcessamento": "14:30:00"
+                    },
+                    "pagamentos": {
+                        "quantidadePagamentos": 25,
+                        "valorPagamentos": 18000.0,
+                        "meta": 20000.0,
+                        "efetividade": 90.0
+                    },
+                    "rankingArrecadacao": [
+                        {
+                            "idRegional": 1,
+                            "regional": "Nome Regional 1",
+                            "valorPagamentos": 8000.0,
+                            "efetividade": 80.0
+                        },
+                        {
+                            "idRegional": 2,
+                            "regional": " Nome Regional 2",
+                            "valorPagamentos": 6000.0,
+                            "efetividade": 60.0
+                        },
+                        {
+                            "idRegional": 3,
+                            "regional": " Nome Regional 3",
+                            "valorPagamentos": 4500.0,
+                            "efetividade": 45.0
+                        }
+                    ]
+                }
+            }
