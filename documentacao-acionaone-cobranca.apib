@@ -182,6 +182,44 @@ Retorna todos os dados do devedor com o credor.
                 "mensagem": "Erro interno"
             }
 
+### Atualizar devedor [PUT]
+Atualiza dados do devedor.
++ Request Atualiza email
+    + Headers 
+
+            Application: ACIONA_ONE
+            Authorization: Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio
+
+    + Attributes
+        + email 
+            + email: `acionaone@jptecno.com.br` (string, required)
+            + tipo (number, required)
+            + origem: `Remessa` (string, required)
+            + situacao: 1 (number, required)
+                + Default: 1
+
++ Request Atualiza telefone
+
+    + Headers 
+
+            Application: ACIONA_ONE
+            Authorization: Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio
+
+    + Attributes
+        + telefone
+            + telefone: `11944447777` (string, required)
+            + tipo (number, required)
+            + origem: `Enrriquecimento` (string, required)
+            + situacao (number, required)
+                 + Default: 1
+
++ Response 200 (application/json)
+    + Attributes
+        + erro: false (boolean)
+        + mensagem: `sucesso`(string)
+
+
+
 ## Contratos [/api/v1/contratos/{cpfcnpf}/{credor}]
 + Parameters
     + cpfcnpf: `02313071286` (required, string) - CPF/CNPJ do devedor.
@@ -534,8 +572,17 @@ Esse método retorna o boleto gerado em PDF e sua linha digitável.
 + Parameters
     + credor: 2002 (required, number) - Código do credor.
     + tipoLegenda: `SITCOB` (required, string) - Tipo de legenda.
+
 ### Consultar Legenda [GET]
 Retorna legendas de acordo com o tipo.
+
+Tipos de legendas: 
+`TELEFONE_ORIGEM` 
+`TIPO_TELEFONE_REF`
+`TELEFONE_SITUACAO`
+`SITCOB`
+`MOTIVO_INADIMPLENCIA`
+`ESTADO_CIVIL`
 
 + Request
     + Headers
@@ -551,54 +598,368 @@ Retorna legendas de acordo com o tipo.
                 "mensagem": "sucesso",
                 "data": [
                     {
-                    "id": "1",
-                    "descricao": "PROPOSTA RENEG ENVIADA",
-                    "permiteagendamento": "false"
+                        "id": "1",
+                        "descricao": "PROPOSTA RENEG ENVIADA",
+                        "permiteagendamento": "false"
                     },
                     {
-                    "id": "8",
-                    "descricao": "TELEFONEMA AO CLIENTE",
-                    "permiteagendamento": "false"
+                        "id": "8",
+                        "descricao": "TELEFONEMA AO CLIENTE",
+                        "permiteagendamento": "false"
                     },
                     {
-                    "id": "22",
-                    "descricao": "TELEFONEMA AO CLIENTE - COM RECADO",
-                    "permiteagendamento": "false"
+                        "id": "22",
+                        "descricao": "TELEFONEMA AO CLIENTE - COM RECADO",
+                        "permiteagendamento": "false"
                     },
                     {
-                    "id": "23",
-                    "descricao": "LIGACAO SEM ATENDIMENTO",
-                    "permiteagendamento": "false"
+                        "id": "23",
+                        "descricao": "LIGACAO SEM ATENDIMENTO",
+                        "permiteagendamento": "false"
                     },
                     {
-                    "id": "27",
-                    "descricao": "CLIENTE INFORMOU PAGTO",
-                    "permiteagendamento": "false"
+                        "id": "27",
+                        "descricao": "CLIENTE INFORMOU PAGTO",
+                        "permiteagendamento": "false"
                     },
                     {
-                    "id": "29",
-                    "descricao": "CONTRATO P/ ANALISE SUPERVISAO",
-                    "permiteagendamento": "false"
+                        "id": "29",
+                        "descricao": "CONTRATO P/ ANALISE SUPERVISAO",
+                        "permiteagendamento": "false"
                     },
                     {
-                    "id": "35",
-                    "descricao": "ACIONAMENTO PROGRAMADO",
-                    "permiteagendamento": "true"
+                        "id": "35",
+                        "descricao": "ACIONAMENTO PROGRAMADO",
+                        "permiteagendamento": "true"
                     },
                     {
-                    "id": "36",
-                    "descricao": "SOLICITA RETORNO - SEM IDENTIFICACAO CPC",
-                    "permiteagendamento": "true"
+                        "id": "36",
+                        "descricao": "SOLICITA RETORNO - SEM IDENTIFICACAO CPC",
+                        "permiteagendamento": "true"
                     },
                     {
-                    "id": "37",
-                    "descricao": "PARCELAMENTO / SIMULACAO",
-                    "permiteagendamento": "false"
+                        "id": "37",
+                        "descricao": "PARCELAMENTO / SIMULACAO",
+                        "permiteagendamento": "false"
                     }
                 ]
             }
 
 
+## Acionamentos [/api/v1/acionamentos/{cpfcnpj}/{credor}]
++ Parameters
+    + cpfcnpj: `02313071286` (required, string)
+    + credor: 2002 (required, number) 
+
+### Registrar acionamento [POST]
++ Request
+    + Headers 
+
+            Application: ACIONA_ONE
+            Authorization: Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio
+
+    + Attributes (object)
+        + sitcob: 3000 (number, required) - Id do acionamento.
+        + tipo: `Posicao` (string, required) - Tipo de acionamento.
+        + observacao: `Cliente vai até a loja` (string, required) - Uma breve descrição do acionamento.
+        + usuario: 30000 (number, required) - Id do usuário que está fazendo a requisição.
+        + empresa: `GAZIN` (string, optional) - Nome da empresa que está realizando a operação.
+        + telefone: `11944447777` (string, optional) - Telefone que o usuário conseguiu contato com o cliente.
+
+    + Body
+
+            {
+                "sitcob", 3000, 
+                "tipo": "Posicao",
+                "observacao": "Cliente vai até a loja",
+                "usuario": 30000,
+                "empresa": "GAZIN",
+                "stage": 1, <!-- verificar com o Ronald -->
+                "telefone": "11944447777",
+            }
+
++ Response 201
+    + Body
+
+            {
+                "erro": false,
+                "mensagem": "sucesso"
+            }
+
+
+### Consultar Acionamentos [GET]
++ Request
+    + Headers
+
+            Application: ACIONA_ONE
+            Authorization: Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio
+
+
+
++ Response 200
+    + Body
+
+            {
+                "erro": false,
+                "mensagem": "sucesso",
+                "data":  [
+                    {
+                        "documento": 24044474168,
+                        "dataMovimentacao": "21/11/2023",
+                        "dataPrevisao": "30/12/1899",
+                        "tipo": "POSICAO",
+                        "cobrador": 10000,
+                        "observacoes": "SMS MASSIVO - ROBOT  2002_SMS_MASSIVO_GAZIN ESCOB_GERAL2[3583]",
+                        "remessa": "",
+                        "horario": "03:07:48",
+                        "codsit": 976,
+                        "ddd": "",
+                        "telefone": 66992324645,
+                        "servico": "",
+                        "permissor": "2111 06:10",
+                        "tipoLigacao": "",
+                        "idPoscob": 24869145
+                    },
+                    {
+                        "documento": 24044474168,
+                        "dataMovimentacao": "21/11/2023",
+                        "dataPrevisao": "30/12/1899",
+                        "tipo": "POSICAO",
+                        "cobrador": 10000,
+                        "observacoes": "EMAIL MASSIVO - ROBOT, projetos@jptecno.com.br - 2002_EMAIL_MASSIVO_GAZIN ESCOB_GERAL[3589]",
+                        "remessa": "",
+                        "horario": "09:56:47",
+                        "codsit": 977,
+                        "ddd": "",
+                        "telefone": "",
+                        "servico": "",
+                        "permissor": "2111 12:50",
+                        "tipoLigacao": "",
+                        "idPoscob": 24937094
+                    },
+                    {
+                        "documento": 24044474168,
+                        "dataMovimentacao": "21/11/2023",
+                        "dataPrevisao": "30/12/1899",
+                        "tipo": "POSICAO",
+                        "cobrador": 10000,
+                        "observacoes": "EMAIL MASSIVO - ROBOT, projetos@jptecno.com.br - 2002_EMAIL_MASSIVO_GAZIN ESCOB_NOVOS[3590]",
+                        "remessa": "",
+                        "horario": "10:34:33",
+                        "codsit": 977,
+                        "ddd": "",
+                        "telefone": "",
+                        "servico": "",
+                        "permissor": "2111 15:20",
+                        "tipoLigacao": "",
+                        "idPoscob": 24981886
+                    },
+                    {
+                        "documento": 24044474168,
+                        "dataMovimentacao": "20/11/2023",
+                        "dataPrevisao": "30/12/1899",
+                        "tipo": "POSICAO",
+                        "cobrador": 10000,
+                        "observacoes": "EMAIL MASSIVO - ROBOT, projetos@jptecno.com.br - 2002_EMAIL_MASSIVO_GAZIN ESCOB_GERAL[3579]",
+                        "remessa": "",
+                        "horario": "09:56:48",
+                        "codsit": 977,
+                        "ddd": "",
+                        "telefone": "",
+                        "servico": "",
+                        "permissor": "2011 12:50",
+                        "tipoLigacao": "",
+                        "idPoscob": 24806280
+                    },
+                    {
+                        "documento": 24044474168,
+                        "dataMovimentacao": "18/11/2023",
+                        "dataPrevisao": "30/12/1899",
+                        "tipo": "POSICAO",
+                        "cobrador": 10000,
+                        "observacoes": "SMS MASSIVO - ROBOT  2002_SMS_MASSIVO_GAZIN ESCOB_GERAL2[3563]",
+                        "remessa": "",
+                        "horario": "03:08:01",
+                        "codsit": 976,
+                        "ddd": "",
+                        "telefone": 66992324645,
+                        "servico": "",
+                        "permissor": "1811 06:00",
+                        "tipoLigacao": "",
+                        "idPoscob": 24561806
+                    },
+                    {
+                        "documento": 24044474168,
+                        "dataMovimentacao": "18/11/2023",
+                        "dataPrevisao": "30/12/1899",
+                        "tipo": "POSICAO",
+                        "cobrador": 10000,
+                        "observacoes": "EMAIL MASSIVO - ROBOT, projetos@jptecno.com.br - 2002_EMAIL_MASSIVO_GAZIN ESCOB_GERAL[3569]",
+                        "remessa": "",
+                        "horario": "09:56:39",
+                        "codsit": 977,
+                        "ddd": "",
+                        "telefone": "",
+                        "servico": "",
+                        "permissor": "1811 13:00",
+                        "tipoLigacao": "",
+                        "idPoscob": 24634064
+                    },
+                    {
+                        "documento": 24044474168,
+                        "dataMovimentacao": "18/11/2023",
+                        "dataPrevisao": "30/12/1899",
+                        "tipo": "POSICAO",
+                        "cobrador": 10000,
+                        "observacoes": "EMAIL MASSIVO - ROBOT, projetos@jptecno.com.br - 2002_EMAIL_MASSIVO_GAZIN ESCOB_NOVOS[3570]",
+                        "remessa": "",
+                        "horario": "10:33:44",
+                        "codsit": 977,
+                        "ddd": "",
+                        "telefone": "",
+                        "servico": "",
+                        "permissor": "1811 15:30",
+                        "tipoLigacao": "",
+                        "idPoscob": 24680869
+                    },
+                    {
+                        "documento": 24044474168,
+                        "dataMovimentacao": "17/11/2023",
+                        "dataPrevisao": "30/12/1899",
+                        "tipo": "POSICAO",
+                        "cobrador": 10000,
+                        "observacoes": "EMAIL MASSIVO - ROBOT, projetos@jptecno.com.br - 2002_EMAIL_MASSIVO_GAZIN ESCOB_GERAL[3559]",
+                        "remessa": "",
+                        "horario": "10:00:17",
+                        "codsit": 977,
+                        "ddd": "",
+                        "telefone": "",
+                        "servico": "",
+                        "permissor": "1711 13:00",
+                        "tipoLigacao": "",
+                        "idPoscob": 24438315
+                    },
+                    {
+                        "documento": 24044474168,
+                        "dataMovimentacao": "17/11/2023",
+                        "dataPrevisao": "30/12/1899",
+                        "tipo": "POSICAO",
+                        "cobrador": 10000,
+                        "observacoes": "EMAIL MASSIVO - ROBOT, projetos@jptecno.com.br - 2002_EMAIL_MASSIVO_GAZIN ESCOB_NOVOS[3560]",
+                        "remessa": "",
+                        "horario": "10:36:54",
+                        "codsit": 977,
+                        "ddd": "",
+                        "telefone": "",
+                        "servico": "",
+                        "permissor": "1711 15:20",
+                        "tipoLigacao": "",
+                        "idPoscob": 24481670
+                    },
+                    {
+                        "documento": 24044474168,
+                        "dataMovimentacao": "16/11/2023",
+                        "dataPrevisao": "16/11/2023",
+                        "tipo": "POSICAO",
+                        "cobrador": 10000,
+                        "observacoes": "Telefone: 66992324645 NAO ATENDEU",
+                        "remessa": 561000009544,
+                        "horario": "18:02:23",
+                        "codsit": 78,
+                        "ddd": "",
+                        "telefone": 66992324645,
+                        "servico": 8002,
+                        "permissor": "1611 19:20",
+                        "tipoLigacao": "",
+                        "idPoscob": 24387262
+                    },
+                    {
+                        "documento": 24044474168,
+                        "dataMovimentacao": "16/11/2023",
+                        "dataPrevisao": "30/12/1899",
+                        "tipo": "POSICAO",
+                        "cobrador": 10000,
+                        "observacoes": "EMAIL MASSIVO - ROBOT, projetos@jptecno.com.br - 2002_EMAIL_MASSIVO_GAZIN ESCOB_GERAL[3549]",
+                        "remessa": "",
+                        "horario": "09:56:21",
+                        "codsit": 977,
+                        "ddd": "",
+                        "telefone": "",
+                        "servico": "",
+                        "permissor": "1611 13:00",
+                        "tipoLigacao": "",
+                        "idPoscob": 24309399
+                    },
+                    {
+                        "documento": 24044474168,
+                        "dataMovimentacao": "16/11/2023",
+                        "dataPrevisao": "30/12/1899",
+                        "tipo": "POSICAO",
+                        "cobrador": 10000,
+                        "observacoes": "EMAIL MASSIVO - ROBOT, projetos@jptecno.com.br - 2002_EMAIL_MASSIVO_GAZIN ESCOB_NOVOS[3550]",
+                        "remessa": "",
+                        "horario": "10:32:41",
+                        "codsit": 977,
+                        "ddd": "",
+                        "telefone": "",
+                        "servico": "",
+                        "permissor": "1611 15:30",
+                        "tipoLigacao": "",
+                        "idPoscob": 24353079
+                    },
+                    {
+                        "documento": 24044474168,
+                        "dataMovimentacao": "15/11/2023",
+                        "dataPrevisao": "30/12/1899",
+                        "tipo": "POSICAO",
+                        "cobrador": 10000,
+                        "observacoes": "SMS MASSIVO - ROBOT  2002_SMS_MASSIVO_GAZIN ESCOB_GERAL2[3533]",
+                        "remessa": "",
+                        "horario": "03:07:23",
+                        "codsit": 976,
+                        "ddd": "",
+                        "telefone": 66992324645,
+                        "servico": "",
+                        "permissor": "1511 06:00",
+                        "tipoLigacao": "",
+                        "idPoscob": 24095886
+                    },
+                    {
+                        "documento": 24044474168,
+                        "dataMovimentacao": "15/11/2023",
+                        "dataPrevisao": "30/12/1899",
+                        "tipo": "POSICAO",
+                        "cobrador": 10000,
+                        "observacoes": "EMAIL MASSIVO - ROBOT, projetos@jptecno.com.br - 2002_EMAIL_MASSIVO_GAZIN ESCOB_GERAL[3539]",
+                        "remessa": "",
+                        "horario": "09:58:31",
+                        "codsit": 977,
+                        "ddd": "",
+                        "telefone": "",
+                        "servico": "",
+                        "permissor": "1511 12:40",
+                        "tipoLigacao": "",
+                        "idPoscob": 24153025
+                    },
+                    {
+                        "documento": 24044474168,
+                        "dataMovimentacao": "15/11/2023",
+                        "dataPrevisao": "30/12/1899",
+                        "tipo": "POSICAO",
+                        "cobrador": 10000,
+                        "observacoes": "EMAIL MASSIVO - ROBOT, projetos@jptecno.com.br - 2002_EMAIL_MASSIVO_GAZIN ESCOB_NOVOS[3540]",
+                        "remessa": "",
+                        "horario": "10:33:03",
+                        "codsit": 977,
+                        "ddd": "",
+                        "telefone": "",
+                        "servico": "",
+                        "permissor": "1511 15:20",
+                        "tipoLigacao": "",
+                        "idPoscob": 24200959
+                    }
+                ]
+            }
 
 # Group Dashboard
 
