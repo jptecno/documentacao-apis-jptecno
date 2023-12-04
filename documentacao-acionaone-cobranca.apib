@@ -67,34 +67,31 @@ Retorna débitos do cliente e seus credores por CPF/CNPJ.
             {
                 "erro": false,
                 "mensagem": "sucesso",
-                "data": {
-                    "credores": [
-                        {
-                            "agrupador": 30029,
-                            "codcontratante": 4,
-                            "logomarca": "https://cliqueupfiles.s3.us-west-2.amazonaws.com/imagens/logos/credores/gazin.png",
-                            "nomcontratante": "LOJAS GAZIN",
-                            "parcelasIndividuaisSequenciais": true,
-                            "url": "http://200.201.209.166:8999/boletoweb/wscdlsrv.dll/wsdl/Iservico",
-                            "credorCrm": 2002,
-                            "pagamento": [
-                                {
-                                    "idTipoPagamento": 1,
-                                    "pagamentoInterno": true,
-                                    "pagamentoProposta": true,
-                                    "tipoPagamento": "boleto"
-                                },
-                                {
-                                    "idTipoPagamento": 4,
-                                    "pagamentoInterno": true,
-                                    "pagamentoProposta": true,
-                                    "tipoPagamento": "pix"
-                                }
-                            ]
-                        }
-                    ],
-                    "nome": "daniela oliveira da silva"
-                }
+                "data": [
+                    {
+                        "agrupador": 30029,
+                        "codcontratante": 4,
+                        "logomarca": "https://cliqueupfiles.s3.us-west-2.amazonaws.com/imagens/logos/credores/gazin.png",
+                        "nomcontratante": "LOJAS GAZIN",
+                        "parcelasIndividuaisSequenciais": true,
+                        "url": "http://200.201.209.166:8999/boletoweb/wscdlsrv.dll/wsdl/Iservico",
+                        "credorCrm": 2002,
+                        "pagamento": [
+                            {
+                                "idTipoPagamento": 1,
+                                "pagamentoInterno": true,
+                                "pagamentoProposta": true,
+                                "tipoPagamento": "boleto"
+                            },
+                            {
+                                "idTipoPagamento": 4,
+                                "pagamentoInterno": true,
+                                "pagamentoProposta": true,
+                                "tipoPagamento": "pix"
+                            }
+                        ]
+                    }
+                ]
             }
 
 
@@ -241,21 +238,19 @@ Retorna dados sobre os contratos vigentes do devedor com o credor.
             {
                 "erro": false,
                 "mensagem": "sucesso",
-                "data": {
-                    "contratos": [
-                        {
-                            "codcredor": "2002",
-                            "contrato": "02523992264",
-                            "permiteAcordo": true,
-                            "permiteDivida": true,
-                            "permiteProposta": false,
-                            "situacao": "Acordo em andamento",
-                            "valorPrincipal": "R$ 833,10",
-                            "vencimento": "24/11/2023",
-                            "quantidadeParcelas": 1
-                        }
-                    ]
-                }
+                "data": [
+                    {
+                        "codcredor": "2002",
+                        "contrato": "02523992264",
+                        "permiteAcordo": true,
+                        "permiteDivida": true,
+                        "permiteProposta": false,
+                        "situacao": "Acordo em andamento",
+                        "valorPrincipal": "R$ 833,10",
+                        "vencimento": "24/11/2023",
+                        "quantidadeParcelas": 1
+                    }
+                ]
             }
 
 
@@ -291,38 +286,36 @@ Esse método só deverá ser chamado quando o campo `permiteDivida` for `true`
             {
                 "erro": false,
                 "mensagem": "sucesso",
-                "data": {
-                    "dividas": [
-                        {
-                            "id": "20.03.2007_03205248333",
-                            "contrato": "03205248333",
-                            "vencimento": "20/03/2007",
-                            "referencia": "03/2007",
-                            "valorPago": "134,29",
-                            "desconto": "1.883,69",
-                            "multa": "2,69",
-                            "juros": "1.881,00",
-                            "valorPrincipal": "2.017,98",
-                            "parcelaFutura": false,
-                            "validade": "21/11/2023",
-                            "dataMaxVencimento": "21/11/2023"
-                        },
-                        {
-                            "id": "20.04.2007_03205248333",
-                            "contrato": "03205248333",
-                            "vencimento": "20/04/2007",
-                            "referencia": "04/2007",
-                            "valorPago": "134,29",
-                            "desconto": "1.874,12",
-                            "multa": "2,69",
-                            "juros": "1.871,43",
-                            "valorPrincipal": "2.008,41",
-                            "parcelaFutura": false,
-                            "validade": "21/11/2023",
-                            "dataMaxVencimento": "21/11/2023"
-                        }
-                    ]
-                }
+                "data":  [
+                    {
+                        "id": "20.03.2007_03205248333",
+                        "contrato": "03205248333",
+                        "vencimento": "20/03/2007",
+                        "referencia": "03/2007",
+                        "valorPago": "134,29",
+                        "desconto": "1.883,69",
+                        "multa": "2,69",
+                        "juros": "1.881,00",
+                        "valorPrincipal": "2.017,98",
+                        "parcelaFutura": false,
+                        "validade": "21/11/2023",
+                        "dataMaxVencimento": "21/11/2023"
+                    },
+                    {
+                        "id": "20.04.2007_03205248333",
+                        "contrato": "03205248333",
+                        "vencimento": "20/04/2007",
+                        "referencia": "04/2007",
+                        "valorPago": "134,29",
+                        "desconto": "1.874,12",
+                        "multa": "2,69",
+                        "juros": "1.871,43",
+                        "valorPrincipal": "2.008,41",
+                        "parcelaFutura": false,
+                        "validade": "21/11/2023",
+                        "dataMaxVencimento": "21/11/2023"
+                    }
+                ]
             }
 
 ## Propostas [/api/v1/propostas/{cpfcnpf}/{credor}/{contrato}{?vencimento}]
@@ -352,48 +345,46 @@ Esse método só deverá ser chamado quando o campo `permiteProposta` for `true`
             {
                 "erro": false,
                 "mensagem": "sucesso",
-                "data": {
-                    "propostas": [
-                        {
-                            "id": "8751695",
-                            "dataMaxVencimento": "28/11/2023",
-                            "descricao": "Proposta À Vista....:   R$  7315,93",
-                            "valorCorrigido": "134.038,73",
-                            "valorDesconto": "126.722,80",
-                            "valorEntrada": "7.315,93",
-                            "valorPago": "7.315,93",
-                            "valorParcela": "7.315,93",
-                            "valorPrincipal": "0,00",
-                            "vencimento": "28/11/2023",
-                            "parcelasFuturas": false,
-                            "porcentagemDesconto": "94,54%",
-                            "prestacoes": [
-                                {
-                                    "id": "6211358_01/07/2021",
-                                    "dataVencimento": "01/07/2021",
-                                    "mesReferencia": "07/2021",
-                                    "numContrato": "6211358",
-                                    "numeroParcela": "",
-                                    "valorPago": "1.593,45",
-                                    "valorPrincipal": "1.593,45"
-                                },
-                                {
-                                    "id": "6217531_11/07/2021",
-                                    "dataVencimento": "11/07/2021",
-                                    "mesReferencia": "07/2021",
-                                    "numContrato": "6217531",
-                                    "numeroParcela": "",
-                                    "valorPago": "5.226,15",
-                                    "valorPrincipal": "5.226,15"
-                                },
-                                
-                            ],
-                            "quantidadeParcelas": "0",
-                            "tipo": "AV",
-                            "valorTotal": "7.315,93"
-                        }
-                    ]
-                }
+                "data": [
+                    {
+                        "id": "8751695",
+                        "dataMaxVencimento": "28/11/2023",
+                        "descricao": "Proposta À Vista....:   R$  7315,93",
+                        "valorCorrigido": "134.038,73",
+                        "valorDesconto": "126.722,80",
+                        "valorEntrada": "7.315,93",
+                        "valorPago": "7.315,93",
+                        "valorParcela": "7.315,93",
+                        "valorPrincipal": "0,00",
+                        "vencimento": "28/11/2023",
+                        "parcelasFuturas": false,
+                        "porcentagemDesconto": "94,54%",
+                        "prestacoes": [
+                            {
+                                "id": "6211358_01/07/2021",
+                                "dataVencimento": "01/07/2021",
+                                "mesReferencia": "07/2021",
+                                "numContrato": "6211358",
+                                "numeroParcela": "",
+                                "valorPago": "1.593,45",
+                                "valorPrincipal": "1.593,45"
+                            },
+                            {
+                                "id": "6217531_11/07/2021",
+                                "dataVencimento": "11/07/2021",
+                                "mesReferencia": "07/2021",
+                                "numContrato": "6217531",
+                                "numeroParcela": "",
+                                "valorPago": "5.226,15",
+                                "valorPrincipal": "5.226,15"
+                            },
+                            
+                        ],
+                        "quantidadeParcelas": "0",
+                        "tipo": "AV",
+                        "valorTotal": "7.315,93"
+                    }
+                ]
             }
 
 ## Acordos [/api/v1/acordos/{cpfcnpf}/{credor}/{contrato}]
@@ -420,23 +411,21 @@ Esse método só deverá ser chamado quando o campo `permiteAcordo` for `true`
             {
                 "erro": false,
                 "mensagem": "sucesso",
-                "data": {
-                    "acordo": {
-                        "codigoAcordo": "40005",
-                        "contrato": "02523992264",
-                        "dataAcordo": "18/11/2023",
-                        "tipo": "AV",
-                        "parcelasAcordo": [
-                            {
-                                "dataVencimento": "24/11/2023",
-                                "id": "1",
-                                "valorPago": "833,10",
-                                "status": "EM ABERTO",
-                                "numero": 1
-                            }
-                        ],
-                        "formaPagamento": 1
-                    }
+                "data":  {
+                    "codigoAcordo": "40005",
+                    "contrato": "02523992264",
+                    "dataAcordo": "18/11/2023",
+                    "tipo": "AV",
+                    "parcelasAcordo": [
+                        {
+                            "dataVencimento": "24/11/2023",
+                            "id": "1",
+                            "valorPago": "833,10",
+                            "status": "EM ABERTO",
+                            "numero": 1
+                        }
+                    ],
+                    "formaPagamento": 1
                 }
             }
 
@@ -557,15 +546,12 @@ Esse método retorna o boleto gerado em PDF e sua linha digitável.
             {
                 "erro": false,
                 "mensagem": "sucesso",
-                "data": {
-                    "boletos": [
-                        {
-                            "url": "https://link.dsb.gl/655c37b764053400081a5b6d",
-                            "linhaDigitavel": "23793099059000011843168000264603195440000083310"
-                        }
-                    ],
-                    "nossonumero": "8738414"
-                }
+                "data":  [
+                    {
+                        "url": "https://link.dsb.gl/655c37b764053400081a5b6d",
+                        "linhaDigitavel": "23793099059000011843168000264603195440000083310"
+                    }
+                ]
             }
 
 ## Legendas [/api/v1/legendas/{credor}/{tipoLegenda}]
