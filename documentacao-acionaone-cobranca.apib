@@ -1,4 +1,5 @@
 FORMAT: 1A
+HOST: https://ykvj92t0ja.execute-api.us-east-2.amazonaws.com
 
 # API do aplicativo Aciona One
 
@@ -189,11 +190,12 @@ Atualiza dados do devedor.
 
     + Attributes
         + email 
+            + id: 1 (number, optional) - Utilizar somente em caso de atualização de email já existente.
             + email: `acionaone@jptecno.com.br` (string, required)
-            + tipo (number, required)
-            + origem: `Remessa` (string, required)
-            + situacao: 1 (number, required)
-                + Default: 1
+            + tipo: `Particular` (string, required)
+            + origem: `Manual` (string, required)
+            + situacao: `atualizado` (string, required)
+                
 
 + Request Atualiza telefone
 
@@ -204,11 +206,12 @@ Atualiza dados do devedor.
 
     + Attributes
         + telefone
+            + id: 1 (number, optional) - Utilizar somente em caso de atualização de telefone já existente.
             + telefone: `11944447777` (string, required)
-            + tipo (number, required)
-            + origem: `Enrriquecimento` (string, required)
-            + situacao (number, required)
-                 + Default: 1
+            + tipo: `Movel Particular` (string, required)
+            + origem: `Manual` (string, required)
+            + situacao: `Valido` (string, required)
+                 
 
 + Response 200 (application/json)
     + Attributes
@@ -563,12 +566,28 @@ Esse método retorna o boleto gerado em PDF e sua linha digitável.
 Retorna legendas de acordo com o tipo.
 
 Tipos de legendas: 
-`TELEFONE_ORIGEM` 
-`TIPO_TELEFONE_REF`
-`TELEFONE_SITUACAO`
+
 `SITCOB`
-`MOTIVO_INADIMPLENCIA`
+
+`EMAIL_ORIGEM`
+
+`EMAIL_SITUACAO`
+
 `ESTADO_CIVIL`
+
+`MOTIVO_INADIMPLENCIA`
+
+`TELEFONE_ORIGEM` 
+
+`TELEFONE_SITUACAO`
+
+`TIPO_ENDERECO`
+
+`TIPO_EMAIL`
+
+`TIPO_TELEFONE`
+
+`TIPO_TELEFONE_REF`
 
 + Request
     + Headers
