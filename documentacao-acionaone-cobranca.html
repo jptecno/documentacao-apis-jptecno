@@ -159,7 +159,8 @@
     "<span class="hljs-attribute">telefone</span>": <span class="hljs-value"><span class="hljs-string">"11944447777"</span></span>,
     "<span class="hljs-attribute">tipo</span>": <span class="hljs-value"><span class="hljs-string">"Movel Particular"</span></span>,
     "<span class="hljs-attribute">origem</span>": <span class="hljs-value"><span class="hljs-string">"Manual"</span></span>,
-    "<span class="hljs-attribute">situacao</span>": <span class="hljs-value"><span class="hljs-string">"Valido"</span>
+    "<span class="hljs-attribute">situacao</span>": <span class="hljs-value"><span class="hljs-string">"Valido"</span></span>,
+    "<span class="hljs-attribute">whats</span>": <span class="hljs-value"><span class="hljs-literal">true</span>
   </span>}
 </span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
   "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
@@ -182,13 +183,17 @@
         </span>}</span>,
         "<span class="hljs-attribute">situacao</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">whats</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span>
         </span>}
       </span>}</span>,
       "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
         <span class="hljs-string">"telefone"</span>,
         <span class="hljs-string">"tipo"</span>,
         <span class="hljs-string">"origem"</span>,
-        <span class="hljs-string">"situacao"</span>
+        <span class="hljs-string">"situacao"</span>,
+        <span class="hljs-string">"whats"</span>
       ]
     </span>}
   </span>}</span>,
@@ -345,19 +350,20 @@
   "<span class="hljs-attribute">modo</span>": <span class="hljs-value"><span class="hljs-string">"0"</span></span>,
   "<span class="hljs-attribute">cpfCnpj</span>": <span class="hljs-value"><span class="hljs-string">"02523992264"</span></span>,
   "<span class="hljs-attribute">credor</span>": <span class="hljs-value"><span class="hljs-string">"2002"</span></span>,
-  "<span class="hljs-attribute">contrato</span>": <span class="hljs-value"><span class="hljs-string">"02523992264"</span>
+  "<span class="hljs-attribute">contrato</span>": <span class="hljs-value"><span class="hljs-string">"02523992264"</span></span>,
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"9798324"</span>
 </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Request&nbsp;&nbsp;<code>modo proposta</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Application</span>: <span class="hljs-string">ACIONA_ONE</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">modo</span>": <span class="hljs-value"><span class="hljs-string">"1"</span></span>,
   "<span class="hljs-attribute">cpfCnpj</span>": <span class="hljs-value"><span class="hljs-string">"02523992264"</span></span>,
   "<span class="hljs-attribute">credor</span>": <span class="hljs-value"><span class="hljs-string">"2002"</span></span>,
   "<span class="hljs-attribute">contrato</span>": <span class="hljs-value"><span class="hljs-string">"02523992264"</span></span>,
-  "<span class="hljs-attribute">idproposta</span>": <span class="hljs-value"><span class="hljs-string">"9798324"</span>
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"9798324"</span>
 </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Request&nbsp;&nbsp;<code>modo divida</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Application</span>: <span class="hljs-string">ACIONA_ONE</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">modo</span>": <span class="hljs-value"><span class="hljs-string">"2"</span></span>,
   "<span class="hljs-attribute">cpfCnpj</span>": <span class="hljs-value"><span class="hljs-string">"02523992264"</span></span>,
   "<span class="hljs-attribute">credor</span>": <span class="hljs-value"><span class="hljs-string">"2002"</span></span>,
   "<span class="hljs-attribute">contrato</span>": <span class="hljs-value"><span class="hljs-string">"02523992264"</span></span>,
-  "<span class="hljs-attribute">idproposta</span>": <span class="hljs-value"><span class="hljs-string">"9798324"</span>
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"9798324"</span>
 </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">erro</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
   "<span class="hljs-attribute">mensagem</span>": <span class="hljs-value"><span class="hljs-string">"sucesso"</span></span>,
@@ -368,22 +374,26 @@
   </span>}
 </span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="cobrança-boletos-1" class="resource"><h3 class="resource-heading">Boletos <a href="#cobrança-boletos-1" class="permalink">&nbsp;&para;</a></h3><div id="cobrança-boletos-post-1" class="action post"><h4 class="action-heading"><div class="name">Emitir boleto</div><a href="#cobrança-boletos-post-1" class="method post">POST</a><code class="uri">/api/v1/boletos/emitir</code></h4><p>Esse método retorna o boleto gerado em PDF e sua linha digitável.</p>
 <h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname">https://ykvj92t0ja.execute-api.us-east-2.amazonaws.com</span>/api/v1/boletos/emitir</span></div><div class="title"><strong>Request&nbsp;&nbsp;<code>modo acordo</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Application</span>: <span class="hljs-string">ACIONA_ONE</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">modo</span>": <span class="hljs-value"><span class="hljs-string">"0"</span></span>,
-  "<span class="hljs-attribute">cpfCnpj</span>": <span class="hljs-value"><span class="hljs-string">"02523992264"</span></span>,
-  "<span class="hljs-attribute">credor</span>": <span class="hljs-value"><span class="hljs-string">"2002"</span></span>,
-  "<span class="hljs-attribute">contrato</span>": <span class="hljs-value"><span class="hljs-string">"02523992264"</span>
+    "<span class="hljs-attribute">modo</span>": <span class="hljs-value"><span class="hljs-string">"0"</span></span>,
+    "<span class="hljs-attribute">cpfCnpj</span>": <span class="hljs-value"><span class="hljs-string">"02523992264"</span></span>,
+    "<span class="hljs-attribute">credor</span>": <span class="hljs-value"><span class="hljs-string">"2002"</span></span>,
+    "<span class="hljs-attribute">contrato</span>": <span class="hljs-value"><span class="hljs-string">"02523992264"</span></span>,
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"9798324"</span>
+    <span class="hljs-string">"nossoNumero"</span>: <span class="hljs-string">"9798324"</span>
 </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Request&nbsp;&nbsp;<code>modo proposta</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Application</span>: <span class="hljs-string">ACIONA_ONE</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">modo</span>": <span class="hljs-value"><span class="hljs-string">"1"</span></span>,
   "<span class="hljs-attribute">cpfCnpj</span>": <span class="hljs-value"><span class="hljs-string">"02523992264"</span></span>,
   "<span class="hljs-attribute">credor</span>": <span class="hljs-value"><span class="hljs-string">"2002"</span></span>,
   "<span class="hljs-attribute">contrato</span>": <span class="hljs-value"><span class="hljs-string">"02523992264"</span></span>,
-  "<span class="hljs-attribute">idproposta</span>": <span class="hljs-value"><span class="hljs-string">"9798324"</span>
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"9798324"</span></span>,
+  "<span class="hljs-attribute">nossoNumero</span>": <span class="hljs-value"><span class="hljs-string">"9798324"</span>
 </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Request&nbsp;&nbsp;<code>modo divida</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Application</span>: <span class="hljs-string">ACIONA_ONE</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer sdniopqweuHJH8iu23408jmokfjoisfuhewrio</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">modo</span>": <span class="hljs-value"><span class="hljs-string">"2"</span></span>,
-  "<span class="hljs-attribute">cpfCnpj</span>": <span class="hljs-value"><span class="hljs-string">"02523992264"</span></span>,
-  "<span class="hljs-attribute">credor</span>": <span class="hljs-value"><span class="hljs-string">"2002"</span></span>,
-  "<span class="hljs-attribute">contrato</span>": <span class="hljs-value"><span class="hljs-string">"02523992264"</span></span>,
-  "<span class="hljs-attribute">idproposta</span>": <span class="hljs-value"><span class="hljs-string">"9798324"</span>
+    "<span class="hljs-attribute">modo</span>": <span class="hljs-value"><span class="hljs-string">"2"</span></span>,
+    "<span class="hljs-attribute">cpfCnpj</span>": <span class="hljs-value"><span class="hljs-string">"02523992264"</span></span>,
+    "<span class="hljs-attribute">credor</span>": <span class="hljs-value"><span class="hljs-string">"2002"</span></span>,
+    "<span class="hljs-attribute">contrato</span>": <span class="hljs-value"><span class="hljs-string">"02523992264"</span></span>,
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"9798324"</span>
+    <span class="hljs-string">"nossoNumero"</span>: <span class="hljs-string">"9798324"</span>
 </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">erro</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
   "<span class="hljs-attribute">mensagem</span>": <span class="hljs-value"><span class="hljs-string">"sucesso"</span></span>,
@@ -1195,7 +1205,7 @@
       </span>}
     ]
   </span>}
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section></div></div></div><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 04 Dec 2023</p><script>/* eslint-env browser */
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section></div></div></div><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 08 Dec 2023</p><script>/* eslint-env browser */
 /* eslint quotes: [2, "single"] */
 'use strict';
 

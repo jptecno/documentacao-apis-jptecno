@@ -211,6 +211,7 @@ Atualiza dados do devedor.
             + tipo: `Movel Particular` (string, required)
             + origem: `Manual` (string, required)
             + situacao: `Valido` (string, required)
+            + whats: true (boolean, required)
                  
 
 + Response 200 (application/json)
@@ -448,7 +449,8 @@ Esse método faz a efetivação da solicitação de um acordo ou segunda via.
                 "modo": "0",
                 "cpfCnpj": "02523992264",
                 "credor": "2002",
-                "contrato": "02523992264"
+                "contrato": "02523992264",
+                "id": "9798324"
             }
 
 + Request modo proposta
@@ -463,7 +465,7 @@ Esse método faz a efetivação da solicitação de um acordo ou segunda via.
                 "cpfCnpj": "02523992264",
                 "credor": "2002",
                 "contrato": "02523992264",
-                "idproposta": "9798324"
+                "id": "9798324"
             }
 
 + Request modo divida
@@ -478,7 +480,7 @@ Esse método faz a efetivação da solicitação de um acordo ou segunda via.
                 "cpfCnpj": "02523992264",
                 "credor": "2002",
                 "contrato": "02523992264",
-                "idproposta": "9798324"
+                "id": "9798324"
             }
             
 + Response 200
@@ -509,7 +511,9 @@ Esse método retorna o boleto gerado em PDF e sua linha digitável.
                 "modo": "0",
                 "cpfCnpj": "02523992264",
                 "credor": "2002",
-                "contrato": "02523992264"
+                "contrato": "02523992264",
+                "id": "9798324"
+                "nossoNumero": "9798324"
             }
 
 
@@ -525,7 +529,8 @@ Esse método retorna o boleto gerado em PDF e sua linha digitável.
                 "cpfCnpj": "02523992264",
                 "credor": "2002",
                 "contrato": "02523992264",
-                "idproposta": "9798324"
+                "id": "9798324",
+                "nossoNumero": "9798324"
             }
 
 + Request modo divida
@@ -540,7 +545,8 @@ Esse método retorna o boleto gerado em PDF e sua linha digitável.
                 "cpfCnpj": "02523992264",
                 "credor": "2002",
                 "contrato": "02523992264",
-                "idproposta": "9798324"
+                "id": "9798324"
+                "nossoNumero": "9798324"
             }
 
 + Response 200
